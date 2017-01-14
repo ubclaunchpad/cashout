@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <!-- This will flash Devise alerts like "Successfully signed in!" -->
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <!-- This will render other views inside the <body> of this page -->
     <%= yield %>
   </body>
 </html>
