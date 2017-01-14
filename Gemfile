@@ -57,3 +57,6 @@ gem 'devise'
 
 # Use Twitter Bootstrap on front end
 gem 'bootstrap-sass', '~> 3.3.6'
+
+# Allows us to use Bootstrap helper methods like "bootstrap_form_for"
+gem 'bootstrap_form', '~> 2.3.0'
