@@ -59,4 +59,4 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 # Allows us to use Bootstrap helper methods like "bootstrap_form_for"
-gem 'bootstrap_form', '~> 2.3.0'
+gem 'bootstrap_form', require: 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
