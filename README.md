@@ -1,24 +1,26 @@
-# README
+# Cashout
+## A fantasy currency trading app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Core Features:
+- Talks to open APIs like FOREX to track currency values
+- Each user gets and account with seed money (maybe $10000) and can buy and sell
+- Users can buy and sell currencies
+- User performance ranking (compared to other users)
+- Allow users to reset their balance periodically (maybe every week) if they go bankrupt  
 
-Things you may want to cover:
+### Secondary features:
+- Allow users to set up leagues among friends
+- Open API to allow people to write their own bots or algorithms that can use the app through their profile (or make this feature like an Integration the way Slack does)
+- Show how many times the user has reset on his/her profile (mark of shame)
+- Allow users to comment on why they made certain trade decisions
+- News feed with world events that could effect currency value (might be a problem if this influences users choice)
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Supported Currencies
+- USD
+- CAD
+- EUR
+- JPY
+- GBP
+- CHF
+- AUD
+- ZAR
