@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>From currency:</strong>
+  <%= @purchase.from_currency %>
+</p>
+
+<p>
+  <strong>To currency:</strong>
+  <%= @purchase.to_currency %>
+</p>
+
+<p>
+  <strong>Amount spent:</strong>
+  <%= @purchase.amount_spent %>
+</p>
+
+<p>
+  <strong>Amount bought:</strong>
+  <%= @purchase.amount_bought %>
+</p>
+
+<p>
+  <strong>Exch rate:</strong>
+  <%= @purchase.exch_rate %>
+</p>
+
+<p>
+  <strong>Time of purchase:</strong>
+  <%= @purchase.time_of_purchase %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @purchase.user %>
+</p>
+
+<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
+<%= link_to 'Back', purchases_path %>

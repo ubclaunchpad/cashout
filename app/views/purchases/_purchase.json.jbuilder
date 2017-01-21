@@ -1,0 +1,2 @@
+json.extract! purchase, :id, :from_currency, :to_currency, :amount_spent, :amount_bought, :exch_rate, :time_of_purchase, :user_id, :created_at, :updated_at
+json.url purchase_url(purchase, format: :json)
