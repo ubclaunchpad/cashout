@@ -1,6 +1,8 @@
 # Cashout
 ## A fantasy currency trading app
 
+Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
+
 ### Core Features:
 - Talks to open APIs like FOREX to track currency values
 - Each user gets and account with seed money (maybe $10000) and can buy and sell

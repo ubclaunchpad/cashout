@@ -58,7 +58,7 @@ gem 'devise'
 # Use Twitter Bootstrap on front end
 gem 'bootstrap-sass', '~> 3.3.6'
 
-# Allows us to use Bootstrap helper methods like "bootstrap_form_for"
+# Allows us to use Bootstrap helper methods like "bootstrap_bootstrap_form_for"
 gem 'bootstrap_form', require: 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
 
 # Use OpenExchangeRates for getting currency data
