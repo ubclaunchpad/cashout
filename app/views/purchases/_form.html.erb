@@ -1,45 +1,33 @@
 <%= bootstrap_form_for(purchase) do |f| %>
-  <% if purchase.errors.any? %>
+    <% if purchase.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+        <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
 
-      <ul>
-      <% purchase.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+            <% purchase.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
     </div>
-  <% end %>
+    <% end %>
 
-  <div class="field">
-    <%= f.text_field :from_currency %>
-  </div>
+    <div class="field">
+        <%= f.select :from_currency, Purchase.currencies %>
+    </div>
 
-  <div class="field">
-    <%= f.text_field :to_currency %>
-  </div>
+    <div class="field">
+        <%= f.select :to_currency, Purchase.currencies %>
+    </div>
 
-  <div class="field">
-    <%= f.number_field :amount_spent %>
-  </div>
+    <div class="form-group">
+        <label class="control-label required" for="purchase_amount_spent">Purchase Amount</label>
+        <div class="input-group">
+            <span class="input-group-addon">USD$</span>
+            <input class="form-control" type="number" name="purchase[amount_spent]" id="purchase_amount_spent">
+        </div>
+    </div>
 
-  <div class="field">
-    <%= f.number_field :amount_bought %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :exch_rate %>
-  </div>
-
-  <div class="field">
-    <%= f.datetime_select :time_of_purchase %>
-  </div>
-
-  <div class="field">
-    <%= f.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+        <%= f.submit :class => "btn btn-success", :value => "Purchase" %>
+    </div>
 <% end %>

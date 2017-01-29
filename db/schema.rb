@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121232522) do
+ActiveRecord::Schema.define(version: 20170129012605) do
+
+  create_table "portfolios", force: :cascade do |t|
+    t.decimal  "USD",        precision: 2
+    t.decimal  "CAD",        precision: 2
+    t.decimal  "EUR",        precision: 2
+    t.decimal  "JPY",        precision: 2
+    t.decimal  "GBP",        precision: 2
+    t.decimal  "CHF",        precision: 2
+    t.decimal  "AUD",        precision: 2
+    t.decimal  "ZAR",        precision: 2
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "purchases", force: :cascade do |t|
     t.string   "from_currency"
@@ -18,10 +31,9 @@ ActiveRecord::Schema.define(version: 20170121232522) do
     t.decimal  "amount_spent"
     t.decimal  "amount_bought"
     t.decimal  "exch_rate"
-    t.datetime "time_of_purchase"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 

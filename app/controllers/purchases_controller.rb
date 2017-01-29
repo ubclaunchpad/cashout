@@ -1,10 +1,11 @@
 class PurchasesController < ApplicationController
     before_action :set_purchase, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /purchases
     # GET /purchases.json
     def index
-        @purchases = Purchase.all
+        @purchases = current_user.purchases.all
     end
 
     # GET /purchases/1
@@ -25,6 +26,9 @@ class PurchasesController < ApplicationController
     # POST /purchases.json
     def create
         @purchase = Purchase.new(purchase_params)
+        @purchase.user_id = current_user
+        @purchase.exch_rate = $oer.exchange_rate(:from => 'USD', :to => @purchase.to_currency.to_s)
+        @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
 
         respond_to do |format|
             if @purchase.save
@@ -69,6 +73,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-        params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent, :amount_bought, :exch_rate, :time_of_purchase, :user_id)
+        params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
     end
 end

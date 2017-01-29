@@ -10,10 +10,16 @@
 
   <body>
     <!-- This will flash Devise alerts like "Successfully signed in!" -->
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice %>
+        <p class="alert alert-info"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+        <p class="alert alert-info"><%= alert %></p>
+    <% end %>
 
     <!-- This will render other views inside the <body> of this page -->
-    <%= yield %>
+    <div class="col-sm-10">
+        <%= yield %>
+    </div>
   </body>
 </html>
