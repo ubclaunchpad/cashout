@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
 
-  resources :purchases, only: [:index, :show, :new, :create]
+  resources :purchases, only: [:index, :new, :create]
 
   # Automatically sets up Devise-specific routes
   devise_for :users

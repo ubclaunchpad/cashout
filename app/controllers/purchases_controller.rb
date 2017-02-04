@@ -8,11 +8,6 @@ class PurchasesController < ApplicationController
         @purchases = current_user.purchases.all
     end
 
-    # GET /purchases/1
-    # GET /purchases/1.json
-    def show
-    end
-
     # GET /purchases/new
     def new
         @purchase = Purchase.new
@@ -25,7 +20,7 @@ class PurchasesController < ApplicationController
         @purchase.user_id = current_user.id
         @purchase.exch_rate = $oer.exchange_rate(:from => 'USD', :to => @purchase.to_currency)
 
-        if not @purchase.amount_spent.nil? 
+        if not @purchase.amount_spent.nil?
             @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
         end
 
