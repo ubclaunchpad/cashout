@@ -27,13 +27,7 @@
 
 <p>
   <strong>Time of purchase:</strong>
-  <%= @purchase.time_of_purchase %>
+  <%= @purchase.created_at %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @purchase.user %>
-</p>
-
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+<%= link_to 'Back', purchases_path, :class => "btn btn-default" %>

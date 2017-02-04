@@ -28,11 +28,6 @@ class PurchasesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
-    get edit_purchase_url(@purchase)
-    assert_response :success
-  end
-
   test "should update purchase" do
     patch purchase_url(@purchase), params: { purchase: { amount_bought: @purchase.amount_bought, amount_spent: @purchase.amount_spent, exch_rate: @purchase.exch_rate, from_currency: @purchase.from_currency, time_of_purchase: @purchase.time_of_purchase, to_currency: @purchase.to_currency, user_id: @purchase.user_id } }
     assert_redirected_to purchase_url(@purchase)

@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Cashout</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-  <body>
-    <!-- This will flash Devise alerts like "Successfully signed in!" -->
-    <% if notice %>
-        <p class="alert alert-info"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-        <p class="alert alert-info"><%= alert %></p>
-    <% end %>
+<body>
+    <%= render "layouts/navbar" %>
 
-    <!-- This will render other views inside the <body> of this page -->
     <div class="col-sm-10">
+        <!-- This will flash Devise alerts like "Successfully signed in!" -->
+        <% if notice %>
+        <p class="alert alert-info"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+        <p class="alert alert-info"><%= alert %></p>
+        <% end %>
+        <!-- This will render other views inside the <body> of this page -->
         <%= yield %>
     </div>
-  </body>
+</body>
 </html>

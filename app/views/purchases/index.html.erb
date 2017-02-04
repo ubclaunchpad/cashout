@@ -23,7 +23,6 @@
             <td><%= purchase.amount_bought %></td>
             <td><%= purchase.exch_rate %></td>
             <td><%= link_to 'Show', purchase %></td>
-            <td><%= link_to 'Edit', edit_purchase_path(purchase) %></td>
             <td><%= link_to 'Delete', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
         <% end %>

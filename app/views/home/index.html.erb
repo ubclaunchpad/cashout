@@ -1,11 +1,2 @@
-<h1>Cashout</h1>
 
-<!-- This will link to Devise (for users) pages -->
-<% if user_signed_in? %>
-    <%= link_to 'Edit User', edit_user_registration_path %> <br/>
-    <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %> <br/>
-    <%= link_to 'Purchase', new_purchase_path %>
-<% else %>
-    <%= link_to 'Sign Up', new_user_registration_path %> </br>
-    <%= link_to 'Sign In', new_user_session_path %>
-<% end %>
+<%= link_to 'Purchase', new_purchase_path %>
