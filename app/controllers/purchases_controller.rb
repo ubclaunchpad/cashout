@@ -18,15 +18,31 @@ class PurchasesController < ApplicationController
     def create
         @purchase = Purchase.new(purchase_params)
         @purchase.user_id = current_user.id
-        @purchase.exch_rate = $oer.exchange_rate(:from => 'USD', :to => @purchase.to_currency)
+        @purchase.exch_rate = $oer.exchange_rate(:from => @purchase.from_currency, :to => @purchase.to_currency)
 
         if not @purchase.amount_spent.nil?
             @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
+        else
+            render :new
+        end
+
+        # Calculate portfolio entries
+        from_curr_value = current_user.portfolio.read_attribute(@purchase.from_currency)
+        new_curr_value = from_curr_value - @purchase.amount_spent
+
+        # Update portfolio
+        current_user.portfolio.update_attribute(@purchase.from_currency, new_curr_value)
+        current_user.portfolio.update_attribute(@purchase.to_currency, @purchase.amount_spent)
+
+        if current_user.portfolio.save
+            format.html { redirect_to purchases_path, notice: 'Purchase was successfully created.' }
+        else
+            format.html { render :new, notice: 'Insufficient Funds' }
         end
 
         respond_to do |format|
             if @purchase.save
-                format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+                format.html { redirect_to purchases_path, notice: 'Purchase was successfully created.' }
                 format.json { render :show, status: :created, location: @purchase }
             else
                 format.html { render :new }

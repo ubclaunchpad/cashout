@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204223948) do
+ActiveRecord::Schema.define(version: 20170204231851) do
 
   create_table "portfolios", force: :cascade do |t|
-    t.decimal  "USD",        precision: 2
-    t.decimal  "CAD",        precision: 2
-    t.decimal  "EUR",        precision: 2
-    t.decimal  "JPY",        precision: 2
-    t.decimal  "GBP",        precision: 2
-    t.decimal  "CHF",        precision: 2
-    t.decimal  "AUD",        precision: 2
-    t.decimal  "ZAR",        precision: 2
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.decimal  "USD",        precision: 2, default: 10000
+    t.decimal  "CAD",        precision: 2, default: 0
+    t.decimal  "EUR",        precision: 2, default: 0
+    t.decimal  "JPY",        precision: 2, default: 0
+    t.decimal  "GBP",        precision: 2, default: 0
+    t.decimal  "CHF",        precision: 2, default: 0
+    t.decimal  "AUD",        precision: 2, default: 0
+    t.decimal  "ZAR",        precision: 2, default: 0
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "purchases", force: :cascade do |t|

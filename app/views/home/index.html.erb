@@ -1,2 +1,23 @@
+<%= link_to 'Make Purchase', new_purchase_path, :class => "btn btn-default" %>
+<%= link_to 'Purchases', purchases_path, :class => "btn btn-default" %>
 
-<%= link_to 'Purchase', new_purchase_path %>
+<h1>Currecy Values</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Currency</th>
+            <th>Value</th>
+            <th>Weekly Change</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @current_rates.each do |currency, data| %>
+        <tr>
+            <td><%= currency %></td>
+            <td><%= data[:value].round(2).to_s %></td>
+            <td><%= data[:change].round(2).to_s %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
