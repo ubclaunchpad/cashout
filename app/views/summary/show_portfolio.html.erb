@@ -1,0 +1,19 @@
+<h1>Portfolio</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Currency</th>
+      <th>Value</th>
+      <th colspan=3></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @portfolio.attributes.each_pair do |currency, amount| %>
+    <tr>
+      <td><%= currency %></td>
+      <td><%= amount %></td>
+    </tr>
+  </tbody>
+</table>

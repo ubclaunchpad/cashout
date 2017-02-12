@@ -28,11 +28,14 @@ class PurchasesController < ApplicationController
 
         # Calculate portfolio entries
         from_curr_value = current_user.portfolio.read_attribute(@purchase.from_currency)
-        new_curr_value = from_curr_value - @purchase.amount_spent
+        new_from_curr_value = from_curr_value - @purchase.amount_spent
+
+        to_curr_value = current_user.portfolio.read_attribute(@purchase.to_currency)
+        new_to_curr_value = from_curr_value + @purchase.amount_bought
 
         # Update portfolio
-        current_user.portfolio.update_attribute(@purchase.from_currency, new_curr_value)
-        current_user.portfolio.update_attribute(@purchase.to_currency, @purchase.amount_spent)
+        current_user.portfolio.update_attribute(@purchase.from_currency, new_from_curr_value)
+        current_user.portfolio.update_attribute(@purchase.to_currency, new_to_curr_value)
 
         if current_user.portfolio.save
             format.html { redirect_to purchases_path, notice: 'Purchase was successfully created.' }

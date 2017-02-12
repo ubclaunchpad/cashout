@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170204231851) do
+ActiveRecord::Schema.define(version: 20170211223942) do
 
   create_table "portfolios", force: :cascade do |t|
     t.decimal  "USD",        precision: 2, default: 10000
@@ -35,6 +35,25 @@ ActiveRecord::Schema.define(version: 20170204231851) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "snapshots", force: :cascade do |t|
+    t.decimal  "USD",        precision: 2
+    t.decimal  "CAD",        precision: 2
+    t.decimal  "EUR",        precision: 2
+    t.decimal  "JPY",        precision: 2
+    t.decimal  "GBP",        precision: 2
+    t.decimal  "CHF",        precision: 2
+    t.decimal  "AUD",        precision: 2
+    t.decimal  "ZAR",        precision: 2
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "usd_nets", force: :cascade do |t|
+    t.decimal  "net",        precision: 2
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|
