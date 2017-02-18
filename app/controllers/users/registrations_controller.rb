@@ -7,9 +7,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
         super
 
         # Create user portfolio
-        @portfolio = Portfolio.new
-        current_user.portfolio = @portfolio
-        
+        if resource.save
+            @portfolio = Portfolio.new
+            @portfolio.user = resource
+            resource.portfolio = @portfolio
+            @portfolio.save
+        end
     end
 
     def edit

@@ -5,6 +5,7 @@ class PurchasesController < ApplicationController
     # GET /purchases
     # GET /purchases.json
     def index
+        # We'll need to page this later!
         @purchases = current_user.purchases.all
     end
 

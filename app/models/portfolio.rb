@@ -5,8 +5,10 @@ class Portfolio < ApplicationRecord
 
     def all_values_geq_zero
         self.attributes.each do |key, value|
-            if value < 0
-                errors.add(key, 'Insufficient Funds')
+            if Purchase::CURRENCIES.include? key
+                if value < 0
+                    errors.add(key, 'Insufficient Funds')
+                end
             end
         end
     end
