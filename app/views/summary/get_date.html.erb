@@ -1,0 +1,9 @@
+<%= bootstrap_form_for(:date, url: snapshot_path) do |f| %>
+<div class="field">
+    <%= f.datetime_select :date %>
+</div>
+
+<div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => "View Status at Time" %>
+</div>
+<% end %>
