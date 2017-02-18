@@ -43,7 +43,8 @@ class SummaryControllerTest < ActionDispatch::IntegrationTest
         gbp_purchase.save
 
 
-        get 
+        get snapshot_path
+        post snapshot_path params: {date: }
 
     end
 end
