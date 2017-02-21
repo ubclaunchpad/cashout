@@ -1,5 +1,5 @@
-bingbong:
-    username: bingbong
-    email: bingbong@gmail.com
-    password: bingbong
-    password_confirmation: bingbong
+# bingbong:
+#     id: 1
+#     username: bingbong
+#     email: bingbong@gmail.com
+#     encrypted_password: <%= User.new.send(:password_digest, 'bingbong') %>

@@ -17,6 +17,7 @@ class SummaryController < ApplicationController
         hash = params["date"]
         datetime = get_datetime_from_hash(hash, "date")
         @snapshot_data = get_snapshot_data_at_datetime(datetime)
+        puts @snapshot_data["CAD"].round(2)
     end
 
     def get_dates
