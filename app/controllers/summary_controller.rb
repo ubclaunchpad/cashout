@@ -17,12 +17,12 @@ class SummaryController < ApplicationController
         hash = params["date"]
         datetime = get_datetime_from_hash(hash, "date")
         @snapshot_data = get_snapshot_data_at_datetime(datetime)
-        puts @snapshot_data["CAD"].round(2)
     end
 
     def get_dates
     end
 
+    # handle the case where the first date is greater than the second date
     def show_difference
         hash = params["dates"]
         datetime_start = get_datetime_from_hash(hash, "date_start")
@@ -50,11 +50,12 @@ class SummaryController < ApplicationController
         def get_snapshot_data_at_datetime(datetime)
             user_id = current_user.read_attribute("id")
 
+            # Change this for efficiency
             snapshot = Snapshot.where("user_id == ? AND created_at <= ?", user_id, datetime).order( \
                 "created_at desc").first
 
             if snapshot == nil
-                snapshot = Snapshot.order("created_at desc").last
+                snapshot = Snapshot.find(2)
             end
 
             snapshot_data = snapshot.attributes
