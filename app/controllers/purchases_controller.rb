@@ -18,33 +18,39 @@ class PurchasesController < ApplicationController
     # POST /purchases.json
     def create
         @purchase = Purchase.new(purchase_params)
+        @portfolio = current_user.portfolio
+
         @purchase.user_id = current_user.id
         @purchase.exch_rate = $oer.exchange_rate(:from => @purchase.from_currency, :to => @purchase.to_currency)
 
-        if not @purchase.amount_spent.nil?
-            @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
-        else
+        if @purchase.amount_spent.nil? or @purchase.amount_spent <= 0
+            flash.now[:alert] = 'Must supply purchase amount greater than 0'
             render :new
+            return
+        else
+            @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
         end
 
         # Calculate portfolio entries
-        from_curr_value = current_user.portfolio.read_attribute(@purchase.from_currency)
-        new_curr_value = from_curr_value - @purchase.amount_spent
+        from_curr_value = @portfolio.read_attribute(@purchase.from_currency)
+        new_from_value = from_curr_value - @purchase.amount_spent
+
+        to_curr_value = @portfolio.read_attribute(@purchase.to_currency)
+        new_to_value = to_curr_value + @purchase.amount_bought
 
         # Update portfolio
-        current_user.portfolio.update_attribute(@purchase.from_currency, new_curr_value)
-        current_user.portfolio.update_attribute(@purchase.to_currency, @purchase.amount_spent)
-
-        if current_user.portfolio.save
-            format.html { redirect_to purchases_path, notice: 'Purchase was successfully created.' }
-        else
-            format.html { render :new, notice: 'Insufficient Funds' }
-        end
+        @portfolio.write_attribute(@purchase.from_currency, new_from_value)
+        @portfolio.write_attribute(@purchase.to_currency, new_to_value)
 
         respond_to do |format|
-            if @purchase.save
-                format.html { redirect_to purchases_path, notice: 'Purchase was successfully created.' }
-                format.json { render :show, status: :created, location: @purchase }
+            if not @portfolio.save
+                flash.now[:alert] = 'Insufficient Funds'
+                format.html { render :new }
+                format.json { render json: @portfolio.errors, status: :unprocessable_entity }
+            elsif @purchase.save
+                flash[:notice] = 'Purchase was successfully created.'
+                format.html { redirect_to purchases_path }
+                format.json { render :index, status: :created, location: @purchase }
             else
                 format.html { render :new }
                 format.json { render json: @purchase.errors, status: :unprocessable_entity }
