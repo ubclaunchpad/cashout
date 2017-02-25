@@ -18,7 +18,7 @@ class PurchasesController < ApplicationController
     # POST /purchases.json
     def create
         @purchase = Purchase.new(purchase_params)
-        @portfolio = Portfolio.where(:id => current_user.id).first
+        @portfolio = current_user.portfolio
 
         @purchase.user_id = current_user.id
         @purchase.exch_rate = $oer.exchange_rate(:from => @purchase.from_currency, :to => @purchase.to_currency)
