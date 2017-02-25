@@ -22,8 +22,6 @@ class PurchasesController < ApplicationController
 
         @purchase.user_id = current_user.id
         @purchase.exch_rate = $oer.exchange_rate(:from => @purchase.from_currency, :to => @purchase.to_currency)
-        puts 'Exchange rate: ' + @purchase.exch_rate.to_s #TODO remove
-        puts 'Amount spent: ' + @purchase.amount_spent.to_s + ' ' + @purchase.from_currency.to_s #TODO remove
 
         if @purchase.amount_spent.nil? or @purchase.amount_spent <= 0
             flash.now[:alert] = 'Must supply purchase amount greater than 0'
@@ -31,19 +29,14 @@ class PurchasesController < ApplicationController
             return
         else
             @purchase.amount_bought = @purchase.exch_rate * @purchase.amount_spent
-            puts 'Amount bought: ' + @purchase.amount_bought.to_s + ' ' + @purchase.to_currency.to_s #TODO remove
         end
 
         # Calculate portfolio entries
         from_curr_value = @portfolio.read_attribute(@purchase.from_currency)
-        puts 'Old from value: ' + from_curr_value.to_s # TODO remove
         new_from_value = from_curr_value - @purchase.amount_spent
-        puts 'New from value: ' + new_from_value.to_s # TODO remove
 
         to_curr_value = @portfolio.read_attribute(@purchase.to_currency)
-        puts 'Old to value: ' + to_curr_value.to_s # TODO remove
         new_to_value = to_curr_value + @purchase.amount_bought
-        puts 'New to value: ' + new_to_value.to_s # TODO remove
 
         # Update portfolio
         @portfolio.write_attribute(@purchase.from_currency, new_from_value)
