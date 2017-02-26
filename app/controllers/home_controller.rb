@@ -3,7 +3,7 @@ class HomeController < ApplicationController
         # To store value of each supported currency in USD
         @current_rates = Hash.new
 
-        Purchase::CURRENCIES.each do |currency|
+        CURRENCIES.each do |currency|
             new_entry = Hash.new
 
             # We cant do this, its too slow because of all the HTTP requests

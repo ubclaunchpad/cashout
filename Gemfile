@@ -28,7 +28,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+# gem 'redis-rails', '~> 4'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -67,5 +67,7 @@ gem 'open_exchange_rates'
 # Use dotenv to load secret environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
 
-# User resque for running jobs
+# Use resque for running jobs
 gem 'resque'
+gem 'resque-scheduler'
+gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
