@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211224315) do
+ActiveRecord::Schema.define(version: 20170225203839) do
 
   create_table "portfolios", force: :cascade do |t|
     t.decimal  "USD",        precision: 2, default: 10000
@@ -79,7 +79,9 @@ ActiveRecord::Schema.define(version: 20170211224315) do
     t.date     "went_broke_at"
     t.integer  "bankruptcy_count"
     t.string   "username"
+    t.integer  "portfolio_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["portfolio_id"], name: "index_users_on_portfolio_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

@@ -2,7 +2,7 @@ class SummaryController < ApplicationController
     before_action :authenticate_user!
 
     def show_portfolio
-        portfolio = current_user.snapshots.order('created_at desc').last
+        portfolio = current_user.portfolio
         @portfolio_data = portfolio.attributes
         @portfolio_data.delete("id")
         @portfolio_data.delete("created_at")
@@ -55,7 +55,7 @@ class SummaryController < ApplicationController
                 "created_at desc").first
 
             if snapshot == nil
-                snapshot = Snapshot.find(2)
+                snapshot = Snapshot.find(1)
             end
 
             snapshot_data = snapshot.attributes

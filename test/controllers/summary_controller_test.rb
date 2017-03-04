@@ -14,19 +14,18 @@ class SummaryControllerTest < ActionDispatch::IntegrationTest
 # the snapshot functions to work, the 1st and 2nd snapshots (portfolio and first) cannot be created
 # at the exact same time (in general, snapshot must be created at distinct times).
     test "snapshots should be correct" do
-        assert @user.snapshots.count == 2
+        assert @user.snapshots.count == 1
         @user.snapshots.find(1).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:00:00"))
-        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:01:00"))
 
         cad = buyCAD
         eur = buyEUR
-        assert @user.snapshots.count == 3
-        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
+        assert @user.snapshots.count == 2
+        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
 
         aud = buyAUD
         gbp = buyGBP
-        assert @user.snapshots.count == 4
-        @user.snapshots.find(4).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
+        assert @user.snapshots.count == 3
+        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
 
         expected = {USD: 10000, CAD: 0, EUR: 0, JPY: 0, GBP: 0, CHF: 0, AUD: 0, ZAR: 0}
         snapshot_correct("18th Feb 2017 04:02:00 UTC", expected)
@@ -45,9 +44,8 @@ class SummaryControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "portfolio should update every purchase" do
-        assert @user.snapshots.count == 2
+        assert @user.snapshots.count == 1
         @user.snapshots.find(1).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:00:00"))
-        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:01:00"))
 
         expected = {USD: 10000, CAD: 0, EUR: 0, JPY: 0, GBP: 0, CHF: 0, AUD: 0, ZAR: 0}
         portfolio_correct(expected)
@@ -57,8 +55,8 @@ class SummaryControllerTest < ActionDispatch::IntegrationTest
         portfolio_correct(expected)
 
         eur = buyEUR
-        assert @user.snapshots.count == 3
-        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
+        assert @user.snapshots.count == 2
+        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
         expected = {USD: 8000, CAD: cad, EUR: eur, JPY: 0, GBP: 0, CHF: 0, AUD: 0, ZAR: 0}
         portfolio_correct(expected)
 
@@ -67,27 +65,26 @@ class SummaryControllerTest < ActionDispatch::IntegrationTest
         portfolio_correct(expected)
 
         gbp = buyGBP
-        assert @user.snapshots.count == 4
-        @user.snapshots.find(4).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
+        assert @user.snapshots.count == 3
+        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
         expected = {USD: 6000, CAD: cad, EUR: eur, JPY: 0, GBP: gbp, CHF: 0, AUD: aud, ZAR: 0}
         portfolio_correct(expected)
     end
 
 # TODO: Check cases where first date is less that 4:00:00, and check backwards days.
     test "differences should be correct" do
-        assert @user.snapshots.count == 2
+        assert @user.snapshots.count == 1
         @user.snapshots.find(1).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:00:00"))
-        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:01:00"))
 
         cad = buyCAD
         eur = buyEUR
-        assert @user.snapshots.count == 3
-        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
+        assert @user.snapshots.count == 2
+        @user.snapshots.find(2).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:10:00"))
 
         aud = buyAUD
         gbp = buyGBP
-        assert @user.snapshots.count == 4
-        @user.snapshots.find(4).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
+        assert @user.snapshots.count == 3
+        @user.snapshots.find(3).update_attribute("created_at", DateTime.parse("18th Feb 2017 04:20:00"))
 
         expected = {USD: -1000, CAD: 0, EUR: eur, JPY: 0, GBP: 0, CHF: 0, AUD: 0, ZAR: 0}
         difference_correct("18th Feb 2017 04:07:00 UTC", "18th Feb 2017 04:012:00 UTC", expected)
