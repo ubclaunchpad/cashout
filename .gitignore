@@ -22,3 +22,6 @@
 
 # Ignore environment secrets
 .env
+
+# Ignore the schema, the migrations should synchronize our DBs
+/db/schema.rb

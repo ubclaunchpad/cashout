@@ -69,3 +69,6 @@ gem 'open_exchange_rates'
 
 # Use dotenv to load secret environment variables
 gem 'dotenv-rails', :groups => [:development, :test]
+
+# User resque for running jobs
+gem 'resque'
