@@ -43,17 +43,22 @@ class PurchasesController < ApplicationController
         @portfolio.write_attribute(@purchase.to_currency, new_to_value)
 
         respond_to do |format|
-            if not @portfolio.save
-                flash.now[:alert] = 'Insufficient Funds'
-                format.html { render :new }
-                format.json { render json: @portfolio.errors, status: :unprocessable_entity }
-            elsif @purchase.save
+            if @portfolio.save and @purchase.save
                 flash[:notice] = 'Purchase was successfully created.'
                 format.html { redirect_to purchases_path }
                 format.json { render :index, status: :created, location: @purchase }
             else
-                format.html { render :new }
-                format.json { render json: @purchase.errors, status: :unprocessable_entity }
+                # Saving the portfolio or purchase failed
+                if @purchase.errors.any?
+                    # There were errors in the purchase, alert client
+                    format.html { render :new }
+                    format.json { render json: @purchase.errors, status: :unprocessable_entity }
+                else
+                    # There were errors in the portfolio, alert client
+                    flash.now[:alert] = 'Insufficient Funds'
+                    format.html { render :new }
+                    format.json { render json: @portfolio.errors, status: :unprocessable_entity }
+                end
             end
         end
     end
