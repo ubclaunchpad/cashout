@@ -1,19 +1,26 @@
 class HomeController < ApplicationController
     def index
-        # To store value of each supported currency in USD
-        @current_rates = Hash.new
+        # Get today's exchange rates
+        todays_rates = ExchangeRatesRecord.order('created_at').last
+        last_weeks_rates = ExchangeRatesRecord.where("created_at <= ?", Date.today - 7 ).limit(1).first
 
-        CURRENCIES.each do |currency|
-            new_entry = Hash.new
+        @rates = Hash.new
+        todays_rates.attributes.each do |currency, value_today|
+            if currency.in? CURRENCIES
+                if last_weeks_rates.nil?
+                    # Don't have records of exchange rates that far in the past
+                    # Get them from OER
+                    value_last_week = $oer.exchange_rate(:from => "USD", :to => currency, :on => (Date.today - 7).to_s)
+                else
+                    # We have a record from a week ago in the db
+                    # So we use that
+                    value_last_week = last_weeks_rates.read_attribute(currency)
+                end
 
-            # We cant do this, its too slow because of all the HTTP requests
-            # todays_rate = $oer.exchange_rate(:from => "USD", :to => currency)
-            # old_rate = $oer.exchange_rate(:from => "USD", :to => currency, :on => (Date.today - 1.month))
-            # percent_change = (todays_rate - old_rate) / old_rate
-
-            # new_entry[:value] = todays_rate
-            # new_entry[:change] = percent_change
-            # @current_rates[currency] = new_entry
+                # Compute percent change
+                delta = (value_today - value_last_week)/value_last_week*100
+                @rates[currency] = { value: value_today, delta: delta }
+            end
         end
 
         render 'index'

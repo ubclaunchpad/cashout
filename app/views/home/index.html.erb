@@ -7,16 +7,20 @@
     <thead>
         <tr>
             <th>Currency</th>
-            <th>Value</th>
+            <th>Exchange Rate (Relative to USD)</th>
             <th>Weekly Change</th>
         </tr>
     </thead>
     <tbody>
-        <% @current_rates.each do |currency, data| %>
+        <% @rates.each do |currency, value| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= data[:value].round(2).to_s %></td>
-            <td><%= data[:change].round(2).to_s %></td>
+            <td><%= value[:value].round(2).to_s %></td>
+            <% if value[:delta] >= 0 %>
+            <td style="color: green"><%= value[:delta].round(2).to_s %>%</td>
+            <% else %>
+            <td style="color: red"><%= value[:delta].round(2).to_s %>%</td>
+            <% end %>
         </tr>
         <% end %>
     </tbody>
