@@ -7,5 +7,7 @@ class User < ApplicationRecord
     validates :username, presence: true, uniqueness: true
 
     has_many :purchases
+    has_many :snapshots
+    has_many :usd_net
     has_one :portfolio
 end

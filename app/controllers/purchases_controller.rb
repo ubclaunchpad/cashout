@@ -2,6 +2,8 @@ class PurchasesController < ApplicationController
     before_action :set_purchase, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
 
+    include PurchasesHelper
+
     # GET /purchases
     # GET /purchases.json
     def index
@@ -48,6 +50,16 @@ class PurchasesController < ApplicationController
                 format.html { render :new }
                 format.json { render json: @portfolio.errors, status: :unprocessable_entity }
             elsif @purchase.save
+                if current_user.purchases.count % purchases_before_snapshot == 0
+                    snapshot_data = @portfolio.attributes
+                    snapshot_data.delete("id")
+                    snapshot_data.delete("created_at")
+                    snapshot_data.delete("updated_at")
+                    snapshot_data.delete("user_id")
+
+                    current_user.snapshots.create(snapshot_data)
+                end
+
                 flash[:notice] = 'Purchase was successfully created.'
                 format.html { redirect_to purchases_path }
                 format.json { render :index, status: :created, location: @purchase }
@@ -59,13 +71,13 @@ class PurchasesController < ApplicationController
     end
 
     private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_purchase
-        @purchase = Purchase.find(params[:id])
-    end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_purchase
+          @purchase = Purchase.find(params[:id])
+      end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def purchase_params
-        params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
-    end
+      # Never trust parameters from the scary internet, only allow the white list through.
+      def purchase_params
+          params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
+      end
 end
