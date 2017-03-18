@@ -10,7 +10,8 @@ class HomeController < ApplicationController
                 if last_weeks_rates.nil?
                     # Don't have records of exchange rates that far in the past
                     # Get them from OER
-                    value_last_week = $oer.exchange_rate(:from => "USD", :to => currency, :on => (Date.today - 7).to_s)
+                    value_last_week = $oer.exchange_rate(:from => "USD",
+                        :to => currency, :on => (Date.today - 7).to_s)
                 else
                     # We have a record from a week ago in the db
                     # So we use that

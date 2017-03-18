@@ -9,6 +9,9 @@ class GetExchangeRatesJob < ApplicationJob
         GetExchangeRatesJob.set(wait_until: Date.tomorrow.midnight).perform_later
 
         # Get most recent exchange rates and store them in the database
+        # NOTE: comment the code below out before you run migrations
+        # Rails insists on running this before migraions are run which causes
+        # errors.
         exchange_rates_record = ExchangeRatesRecord.new
         $oer.latest.rates.each do |currency, value|
             if CURRENCIES.include? currency

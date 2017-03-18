@@ -3,6 +3,17 @@
 
 Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
 
+### Important!
+
+Before you run migrations make sure you comment out the last few lines in
+`get_exchange_rates.rb`. Rails insists on running that job before running the
+migrations which causes errors.
+
+- Comment out the code at the bottom of in `get_exchange_rates.rb`
+- Run migrations
+- Uncomment the code
+- Run the server
+
 ### Core Features:
 - Talks to open APIs like FOREX to track currency values
 - Each user gets and account with seed money (maybe $10000) and can buy and sell
