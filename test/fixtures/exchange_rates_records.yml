@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  USD: 9.99
+  CAD: 9.99
+  EUR: 9.99
+  JPY: 9.99
+  GBP: 9.99
+  CHF: 9.99
+  AUD: 9.99
+  ZAR: 9.99
+
+two:
+  USD: 9.99
+  CAD: 9.99
+  EUR: 9.99
+  JPY: 9.99
+  GBP: 9.99
+  CHF: 9.99
+  AUD: 9.99
+  ZAR: 9.99

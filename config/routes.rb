@@ -1,4 +1,8 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
+    # For viewing Resque jobs
+    mount Resque::Server.new, at: "/resque"
 
     get 'home/index'
 

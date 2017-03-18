@@ -1,10 +1,10 @@
 <%= bootstrap_form_for(purchase) do |f| %>
 <div class="field">
-    <%= f.select :from_currency, Purchase::CURRENCIES %>
+    <%= f.select :from_currency, CURRENCIES %>
 </div>
 
 <div class="field">
-    <%= f.select :to_currency, Purchase::CURRENCIES %>
+    <%= f.select :to_currency, CURRENCIES %>
 </div>
 
 <div class="field">

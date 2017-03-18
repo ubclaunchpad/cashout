@@ -1,8 +1,6 @@
 class Purchase < ApplicationRecord
     belongs_to :user
 
-    CURRENCIES = ['USD', 'CAD', 'EUR', 'JPY', 'GBP', 'CHF', 'AUD', 'ZAR']
-
     validates :from_currency, inclusion: CURRENCIES
     validates :to_currency, inclusion: CURRENCIES
     validate :currencies_different_validation
