@@ -55,6 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Use Devise for user auth
 gem 'devise'
 
+# Use controller-testing for controller testing
+gem 'rails-controller-testing'
+
 # Use Twitter Bootstrap on front end
 gem 'bootstrap-sass', '~> 3.3.6'
 

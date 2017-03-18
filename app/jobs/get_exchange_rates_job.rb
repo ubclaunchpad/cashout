@@ -12,13 +12,15 @@ class GetExchangeRatesJob < ApplicationJob
         # NOTE: comment the code below out before you run migrations
         # Rails insists on running this before migraions are run which causes
         # errors.
-        exchange_rates_record = ExchangeRatesRecord.new
-        $oer.latest.rates.each do |currency, value|
-            if CURRENCIES.include? currency
-                exchange_rates_record.write_attribute(currency, value.to_d)
+        unless ARGV.include?("db:migrate")
+            exchange_rates_record = ExchangeRatesRecord.new
+            $oer.latest.rates.each do |currency, value|
+                if CURRENCIES.include? currency
+                    exchange_rates_record.write_attribute(currency, value.to_d)
+                end
             end
+            exchange_rates_record.save
+            puts 'Ran job!'
         end
-        exchange_rates_record.save
-        puts 'Ran job!'
     end
 end
