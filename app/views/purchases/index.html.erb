@@ -18,8 +18,8 @@
         <tr>
             <td><%= purchase.from_currency %></td>
             <td><%= purchase.to_currency %></td>
-            <td><%= purchase.amount_spent.round(2) %></td>
-            <td><%= purchase.amount_bought.round(2) %></td>
+            <td><%= purchase.amount_spent.round(4) %></td>
+            <td><%= purchase.amount_bought.round(4) %></td>
             <td><%= purchase.exch_rate %></td>
             <td><%= purchase.created_at %></td>
         </tr>

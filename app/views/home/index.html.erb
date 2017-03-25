@@ -1,10 +1,6 @@
-<%= link_to 'Make Purchase', new_purchase_path, :class => "btn btn-default" %>
-<%= link_to 'Purchases', purchases_path, :class => "btn btn-default" %>
-<%= link_to 'Portfolio', portfolio_path, :class => "btn btn-default" %>
+<h1>Exchange Rates</h1>
 
-<h1>Currecy Values</h1>
-
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>Currency</th>
@@ -16,11 +12,11 @@
         <% @rates.each do |currency, value| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= value[:value].round(2).to_s %></td>
+            <td><%= value[:value].round(4).to_s %></td>
             <% if value[:delta] >= 0 %>
-            <td style="color: green"><%= value[:delta].round(2).to_s %>%</td>
+            <td style="color: green"><%= value[:delta].round(4).to_s %>%</td>
             <% else %>
-            <td style="color: red"><%= value[:delta].round(2).to_s %>%</td>
+            <td style="color: red"><%= value[:delta].round(4).to_s %>%</td>
             <% end %>
         </tr>
         <% end %>

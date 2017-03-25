@@ -1,10 +1,6 @@
-<%= link_to 'Portfolio', portfolio_path, :class => "btn btn-default" %>
-<%= link_to 'Records', snapshot_path, :class => "btn btn-default" %>
-
-
 <h1>Snapshot</h1>
 
-<table class="table">
+<table class="table" style="margin-top: 10px;">
     <thead>
         <tr>
             <th>Currency</th>
@@ -17,7 +13,7 @@
         <% @snapshot_data.each do |currency, value| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= value.round(2) %></td>
+            <td><%= value.round(4) %></td>
         </tr>
         <% end %>
     </tbody>

@@ -1,7 +1,3 @@
-<%= link_to 'Portfolio', portfolio_path, :class => "btn btn-default" %>
-<%= link_to 'Assets Difference', difference_path, :class => "btn btn-default" %>
-
-
 <h1>Difference</h1>
 
 <table class="table">
@@ -17,7 +13,7 @@
         <% @difference_data.each do |currency, value| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= value.round(2) %></td>
+            <td><%= value.round(4) %></td>
         </tr>
         <% end %>
     </tbody>

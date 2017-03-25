@@ -1,7 +1,3 @@
-<%= link_to 'Records', snapshot_path, :class => "btn btn-default" %>
-<%= link_to 'Assets Difference', difference_path, :class => "btn btn-default" %>
-
-
 <h1>Portfolio</h1>
 
 <table class="table">
@@ -17,7 +13,7 @@
         <% @portfolio_data.each do |currency, amount| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= amount.round(2) %></td>
+            <td><%= amount.round(4) %></td>
         </tr>
         <% end %>
     </tbody>
