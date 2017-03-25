@@ -13,7 +13,7 @@
         <% @portfolio_data.each do |currency, amount| %>
         <tr>
             <td><%= currency %></td>
-            <td><%= amount.round(4) %></td>
+            <td><%= amount.round(6) %></td>
         </tr>
         <% end %>
     </tbody>

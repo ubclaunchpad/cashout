@@ -14,7 +14,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
             @portfolio.save
 
             #Create the first entry
-            current_user.snapshots.create(USD: 10000, CAD: 0, EUR: 0, JPY: 0, GBP: 0, CHF: 0, AUD: 0, ZAR: 0)
+            current_user.snapshots.create(USD: 10000, CAD: 0, EUR: 0, JPY: 0,
+                GBP: 0, CHF: 0, AUD: 0, ZAR: 0, BTC: 0)
         end
     end
 

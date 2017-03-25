@@ -1,3 +1,4 @@
+include ApplicationHelper
 require_relative '../models/purchase'
 
 class GetExchangeRatesJob < ApplicationJob
@@ -16,7 +17,8 @@ class GetExchangeRatesJob < ApplicationJob
                     exchange_rates_record.write_attribute(currency, value.to_d)
                 end
             end
-            exchange_rates_record.save
+            exchange_rates_record.write_attribute('BTC', get_btc_value().to_d)
+            exchange_rates_record.save!
             puts 'Ran job!'
         end
     end

@@ -23,7 +23,16 @@ class PurchasesController < ApplicationController
         @portfolio = current_user.portfolio
 
         @purchase.user_id = current_user.id
-        @purchase.exch_rate = $oer.exchange_rate(:from => @purchase.from_currency, :to => @purchase.to_currency)
+
+        # Get exchange rate TODO: make this work
+        if @purchase.to_currency == 'BTC'
+            @purchase.exch_rate = 1.0/get_btc_value()
+        elsif @purchase.from_currency == 'BTC'
+            @purchase.exch_rate = get_btc_value()
+        else
+            @purchase.exch_rate = $oer.exchange_rate(
+                :from => @purchase.from_currency, :to => @purchase.to_currency)
+        end
 
         if @purchase.amount_spent.nil? or @purchase.amount_spent <= 0
             flash.now[:alert] = 'Must supply purchase amount greater than 0'
@@ -76,13 +85,13 @@ class PurchasesController < ApplicationController
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_purchase
-          @purchase = Purchase.find(params[:id])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_purchase
+        @purchase = Purchase.find(params[:id])
+    end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
-      def purchase_params
-          params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
-      end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def purchase_params
+        params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
+    end
 end

@@ -8,5 +8,6 @@ class AddDefaultValsToPortfolio < ActiveRecord::Migration[5.0]
         change_column_default :portfolios, :CHF, 0
         change_column_default :portfolios, :AUD, 0
         change_column_default :portfolios, :ZAR, 0
+        change_column_default :portfolios, :BTC, 0
     end
 end

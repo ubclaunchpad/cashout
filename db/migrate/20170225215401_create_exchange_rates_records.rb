@@ -9,6 +9,7 @@ class CreateExchangeRatesRecords < ActiveRecord::Migration[5.0]
             t.decimal :CHF
             t.decimal :AUD
             t.decimal :ZAR
+            t.decimal :BTC
 
             t.timestamps
         end
