@@ -24,10 +24,20 @@ class PurchasesController < ApplicationController
 
         @purchase.user_id = current_user.id
 
-        # Get exchange rate TODO: make this work
+        # Get exchange rate
         if @purchase.to_currency == 'BTC'
+            if @purchase.from_currency != 'USD'
+                flash.now[:alert] = 'Sorry, you can only buy BTC with USD.'
+                render :new
+                return
+            end
             @purchase.exch_rate = 1.0/get_btc_value()
         elsif @purchase.from_currency == 'BTC'
+            if @purchase.to_currency != 'USD'
+                flash.now[:alert] = 'Sorry, you can only buy USD with BTC.'
+                render :new
+                return
+            end
             @purchase.exch_rate = get_btc_value()
         else
             @purchase.exch_rate = $oer.exchange_rate(

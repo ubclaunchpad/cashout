@@ -7,7 +7,7 @@ Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
 - Talks to open APIs like FOREX to track currency values
 - Each user gets and account with seed money (maybe $10000) and can buy and sell
 - Users can buy and sell currencies
-- User performance ranking (compared to other users)
+- User performance ranking based on PPP
 - Allow users to reset their balance periodically (maybe every week) if they go bankrupt  
 
 ### Secondary features:
@@ -16,6 +16,7 @@ Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
 - Show how many times the user has reset on his/her profile (mark of shame)
 - Allow users to comment on why they made certain trade decisions
 - News feed with world events that could effect currency value (might be a problem if this influences users choice)
+- User-configurable price-point notifications
 
 ### Supported Currencies
 - USD
@@ -26,3 +27,4 @@ Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
 - CHF
 - AUD
 - ZAR
+- BTC
