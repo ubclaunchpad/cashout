@@ -1,5 +1,5 @@
 # Start Redis server
-system 'redis-server /usr/local/etc/redis.conf'
+# system 'redis-server /usr/local/etc/redis.conf'
 
 # Declare all supported currencies
 CURRENCIES = ['USD', 'CAD', 'EUR', 'JPY', 'GBP', 'CHF', 'AUD', 'ZAR', 'BTC']

@@ -13,7 +13,7 @@ class PurchasesController < ApplicationController
 
     # GET /purchases/new
     def new
-        @purchase = Purchase.new
+        @purchase = Purchase.new(purchase_setup_params)
     end
 
     # POST /purchases
@@ -103,5 +103,9 @@ class PurchasesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
         params.require(:purchase).permit(:from_currency, :to_currency, :amount_spent)
+    end
+
+    def purchase_setup_params
+        params.permit(:from_currency, :to_currency)
     end
 end

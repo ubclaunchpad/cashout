@@ -10,7 +10,9 @@ class GetExchangeRatesJob < ApplicationJob
         GetExchangeRatesJob.set(wait_until: Date.tomorrow.midnight).perform_later
 
         # Get most recent exchange rates and store them in the database
-        unless ARGV.include?("db:migrate")
+        unless ARGV.include?("db:migrate") or
+            ExchangeRatesRecord.first.read_attribute(:created_at).to_date == Date.today.to_date
+
             exchange_rates_record = ExchangeRatesRecord.new
             $oer.latest.rates.each do |currency, value|
                 if CURRENCIES.include? currency

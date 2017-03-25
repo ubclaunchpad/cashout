@@ -6,6 +6,10 @@
             <th>Currency</th>
             <th>Exchange Rate (Relative to USD)</th>
             <th>Weekly Change</th>
+            <% if user_signed_in? %>
+            <th></th>
+            <th></th>
+            <% end %>
         </tr>
     </thead>
     <tbody>
@@ -17,6 +21,10 @@
             <td style="color: green"><%= value[:delta].round(4).to_s %>%</td>
             <% else %>
             <td style="color: red"><%= value[:delta].round(4).to_s %>%</td>
+            <% end %>
+            <% if user_signed_in? %>
+            <td><%= link_to 'Buy', new_purchase_path(:to_currency => currency) %></td>
+            <td><%= link_to 'Sell', new_purchase_path(:from_currency => currency) %></td>
             <% end %>
         </tr>
         <% end %>
