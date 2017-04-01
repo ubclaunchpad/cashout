@@ -120,6 +120,7 @@ GEM
     open_exchange_rates (0.5.1)
       yajl-ruby
     orm_adapter (0.5.0)
+    pg (0.20.0)
     puma (3.7.1)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -231,6 +232,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.0.5)
   open_exchange_rates
+  pg
   puma (~> 3.0)
   rails (~> 5.0.1)
   rails-controller-testing
