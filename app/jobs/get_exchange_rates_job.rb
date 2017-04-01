@@ -9,10 +9,16 @@ class GetExchangeRatesJob < ApplicationJob
         # Enqueue this same job for tomorrow at midnight
         GetExchangeRatesJob.set(wait_until: Date.tomorrow.midnight).perform_later
 
-        # Get most recent exchange rates and store them in the database
-        unless ARGV.include?("db:migrate") or
-            ExchangeRatesRecord.first.read_attribute(:created_at).to_date == Date.today.to_date
+        dont_execute = (
+            ARGV.include?("db:migrate") or
+            (
+                (not ExchangeRatesRecord.first.nil?) &&
+                (ExchangeRatesRecord.first.read_attribute(:created_at).to_date == Date.today.to_date)
+            )
+        )
 
+        # Get most recent exchange rates and store them in the database
+        unless dont_execute
             exchange_rates_record = ExchangeRatesRecord.new
             $oer.latest.rates.each do |currency, value|
                 if CURRENCIES.include? currency

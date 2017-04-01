@@ -7,7 +7,7 @@ module ApplicationHelper
         res = Net::HTTP.start(url.host, url.port) {|http|
             http.request(req)
         }
-        return JSON.parse(res.body)['bpi']['USD']['rate'].to_d
+        return JSON.parse(res.body)['bpi']['USD']['rate'].remove(',').to_d
     end
 
     def get_btc_value_last_week()

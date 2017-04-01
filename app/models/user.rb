@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
     has_many :purchases
     has_many :snapshots
+    has_many :leagues
     has_many :usd_net
     has_one :portfolio
 end

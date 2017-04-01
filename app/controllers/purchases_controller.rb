@@ -34,7 +34,7 @@ class PurchasesController < ApplicationController
             @purchase.exch_rate = 1.0/get_btc_value()
         elsif @purchase.from_currency == 'BTC'
             if @purchase.to_currency != 'USD'
-                flash.now[:alert] = 'Sorry, you can only buy USD with BTC.'
+                flash.now[:alert] = 'Sorry, you can only use BTC to buy USD.'
                 render :new
                 return
             end
