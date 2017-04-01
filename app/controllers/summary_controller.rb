@@ -11,12 +11,12 @@ class SummaryController < ApplicationController
     end
 
     def get_date
+        @snapshots = Snapshot.all
     end
 
     def show_snapshot
-        hash = params["date"]
-        datetime = get_datetime_from_hash(hash, "date")
-        @snapshot_data = get_snapshot_data_at_datetime(datetime)
+        date = params[:date]
+        @snapshot_data = get_snapshot_data_at_datetime(date)
     end
 
     def get_dates

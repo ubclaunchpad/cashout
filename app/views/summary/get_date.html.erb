@@ -1,11 +1,30 @@
-<div style="margin-top: 10px;">
-    <%= bootstrap_form_for(:date, url: snapshot_path) do |f| %>
-    <div class="field">
-        <%= f.datetime_select :date %>
-    </div>
+<h1>Snapshots</h1>
 
-    <div class="actions">
-        <%= f.submit :class => "btn btn-primary", :value => "View Status at Time" %>
-    </div>
-    <% end %>
-</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <% @snapshots.first.attributes.each do |key, value| %>
+                <% if not ['id', 'user_id', 'updated_at'].include? key %>
+                <% if key == 'created_at' %>
+                    <th>Created On</th>
+                <% else %>
+                    <th><%= key %></th>
+                <% end %>
+                <% end %>
+            <% end %>
+        </tr>
+    </thead>
+    <tbody>
+        <% @snapshots.each do |s| %>
+        <tr>
+            <% s.attributes.each do |key, value| %>
+            <% if key == 'created_at' %>
+            <td><%= link_to(value.to_date, snapshot_path(:date => value), :method => 'POST') %></td>
+            <% elsif not ['id', 'user_id', 'updated_at'].include? key %>
+            <td><%= value %></td>
+            <% end %>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
