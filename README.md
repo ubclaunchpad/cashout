@@ -1,4 +1,6 @@
 # Cashout
+[![ZenHub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
+
 ## A fantasy currency trading app
 
 Uses [Open Exchange Rates API](https://github.com/vlado/open_exchange_rates)
