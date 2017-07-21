@@ -23,6 +23,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def destroy
+        Snapshot.where(:user_id == current_user.id).destroy_all
+        Portfolio.where(:user_id == current_user.id).destroy_all
         super
     end
 end

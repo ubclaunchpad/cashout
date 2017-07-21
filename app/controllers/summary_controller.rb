@@ -35,6 +35,9 @@ class SummaryController < ApplicationController
         snapshot_data_start.each do |currency, value|
             @difference_data[currency] -= value
         end
+
+        @start_date = datetime_start.strftime("%m/%d/%Y %I:%M%p")
+        @end_date = datetime_end.strftime("%m/%d/%Y %I:%M%p")
     end
 
     private
@@ -51,8 +54,7 @@ class SummaryController < ApplicationController
             user_id = current_user.read_attribute("id")
 
             # Change this for efficiency
-            snapshot = Snapshot.where("user_id == ? AND created_at <= ?", user_id, datetime).order( \
-                "created_at desc").first
+            snapshot = Snapshot.where("user_id = ? AND created_at <= ?", user_id, datetime).order("created_at desc").first
 
             if snapshot == nil
                 snapshot = Snapshot.find(1)
